@@ -24,6 +24,8 @@ public class GameMgr : MonoBehaviour
 
     void Start()
     {
+        mBaoZhaEffect.gameObject.SetActive(false);
+        BadOpEffect.gameObject.SetActive(false);
         mBaoZhaEffectPool.Init(mBaoZhaEffect.gameObject, 2);
         goClickOk.SetActive(false);
         mLoadingView.gameObject.SetActive(true);
@@ -81,6 +83,7 @@ public class GameMgr : MonoBehaviour
             }
             else
             {
+                goClickOk.SetActive(false);
                 foreach (var v in mSelectItemList)
                 {
                     var mItem = v;
@@ -161,7 +164,6 @@ public class GameMgr : MonoBehaviour
                 }
             }
 
-            goClickOk.SetActive(false);
             if (nXiaoChuCount >= 15)
             {
                 //跳转到商店界面
