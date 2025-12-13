@@ -1,5 +1,7 @@
 Unity AppLovin 试玩广告
 
+官方插件：https://playground.lunalabs.io/downloads
+
 # 遇到的问题：
 
 1：报错: .Net 目标框架 v4.7 缺失的问题？
