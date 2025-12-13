@@ -3536,56 +3536,6 @@ public class LTSpline {
                 + .5f * c - .5f * a;
     }*/
 
-    public void drawLinesGLLines(Material outlineMaterial, Color color, float width){
-        GL.PushMatrix();
-        outlineMaterial.SetPass(0);
-        GL.LoadPixelMatrix();
-        GL.Begin(GL.LINES);
-        GL.Color(color);
-
-        if (constantSpeed) {
-            if (this.ptsAdjLength >= 4) {
-
-                Vector3 prevPt = this.ptsAdj[0];
-
-                for (int i = 0; i < this.ptsAdjLength; i++) {
-                    Vector3 currPt2 = this.ptsAdj[i];
-                    GL.Vertex(prevPt);
-                    GL.Vertex(currPt2);
-
-                    prevPt = currPt2;
-                }
-            }
-
-        } else {
-            if (this.pts.Length >= 4) {
-
-                Vector3 prevPt = this.pts[0];
-
-                float split = 1f / ((float)this.pts.Length * 10f);
-
-                float iter = 0f;
-                while (iter < 1f) {
-                    float at = iter / 1f;
-                    Vector3 currPt2 = interp(at);
-                    // Debug.Log("currPt2:"+currPt2);
-
-                    GL.Vertex(prevPt);
-                    GL.Vertex(currPt2);
-
-                    prevPt = currPt2;
-
-                    iter += split;
-                }
-            }
-        }
-
-
-        GL.End();
-        GL.PopMatrix();
-
-    }
-
     public Vector3[] generateVectors(){
         if (this.pts.Length >= 4) {
             List<Vector3> meshPoints = new List<Vector3>();

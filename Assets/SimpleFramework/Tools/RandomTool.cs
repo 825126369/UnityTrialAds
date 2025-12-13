@@ -1,21 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.UI;
 
 public static class RandomTool
 {
     private static readonly System.Random random = null;
     static RandomTool()
     {
-        int nSeed = (int)(TimeTool.GetNowTimeStamp() % int.MaxValue);
+        int nSeed = (int)(DateTime.Now.Ticks % int.MaxValue);
         random = new System.Random(nSeed);
     }
     
