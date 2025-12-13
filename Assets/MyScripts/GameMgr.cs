@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameMgr : MonoBehaviour
 {
+    public BaoZhaEffect mBaoZhaEffect;
     public GameObject BadOpEffect;
     public GameObject goClickOk;
     public Loading mLoadingView;
@@ -18,8 +19,12 @@ public class GameMgr : MonoBehaviour
     readonly List<List<Item>> mItemList = new List<List<Item>>();
     readonly List<Item> mSelectItemList = new List<Item>();
 
+    readonly NodeComponentPool<BaoZhaEffect> mBaoZhaEffectPool = new NodeComponentPool<BaoZhaEffect>();
+    int nXiaoChuCount = 0;
+
     void Start()
     {
+        mBaoZhaEffectPool.Init(mBaoZhaEffect.gameObject, 2);
         goClickOk.SetActive(false);
         mLoadingView.gameObject.SetActive(true);
         InitGame();
@@ -71,7 +76,7 @@ public class GameMgr : MonoBehaviour
         {
             if (mSelectItemList[0].Key == mSelectItemList[1].Key)
             {
-                goClickOk.SetActive(true);
+                nXiaoChuCount++;
                 DoMove();
             }
             else
@@ -123,17 +128,46 @@ public class GameMgr : MonoBehaviour
             }
         }
 
-        mSelectItemList.Clear();
-        foreach (var v in mNeedMoveList)
+        goClickOk.SetActive(true);
+        foreach (var v in mSelectItemList)
         {
-            int i = v;
-            var mItemList2 = mItemList[i];
-            for (int j = 0; j < mItemList2.Count; j++)
+            var mItem = v;
+            LeanTween.delayedCall(0.5f, () =>
             {
-                var mItem = (Item)mItemList2[j];
-                LeanTween.moveLocalY(mItem.gameObject, GetPos(i, j).y, 0.5f);
-            }
+                var mEffect = mBaoZhaEffectPool.popObj();
+                mEffect.SetImage(this, mItem.Key);
+                mEffect.transform.SetParent(this.transform, false);
+                mEffect.transform.position = mItem.transform.position;
+                mEffect.gameObject.SetActive(true);
+
+                LeanTween.delayedCall(1.5f, () =>
+                {
+                    mBaoZhaEffectPool.recycleObj(mEffect);
+                });
+            });
         }
+
+        mSelectItemList.Clear();
+        LeanTween.delayedCall(1.0f, () =>
+        {
+            foreach (var v in mNeedMoveList)
+            {
+                int i = v;
+                var mItemList2 = mItemList[i];
+                for (int j = 0; j < mItemList2.Count; j++)
+                {
+                    var mItem = (Item)mItemList2[j];
+                    LeanTween.moveLocalY(mItem.gameObject, GetPos(i, j).y, 0.5f);
+                }
+            }
+
+            goClickOk.SetActive(false);
+            if (nXiaoChuCount >= 15)
+            {
+                //跳转到商店界面
+                Debug.Log("跳转");
+            }
+        });
 
     }
 

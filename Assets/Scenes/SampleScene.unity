@@ -510,7 +510,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.7597966, b: 1, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1064,6 +1064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec53e9c5e8558742b4ebb5b13da0781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameMgr
+  mBaoZhaEffect: {fileID: 8286642723196131351, guid: 08cbe7fe1408ea74093df702c8dd5454, type: 3}
   BadOpEffect: {fileID: 2031556484}
   goClickOk: {fileID: 611689495}
   mLoadingView: {fileID: 115040967}
