@@ -445,6 +445,8 @@ PlayerSettings:
     m_Format: 0
   - m_BuildTarget: OpenHarmony
     m_Format: 0
+  - m_BuildTarget: WebGL
+    m_Format: 3
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -722,7 +724,7 @@ PlayerSettings:
     QNX: 1
     Stadia: 1
     VisionOS: 1
-    WebGL: 1
+    WebGL: 3
     WeixinMiniGame: 1
     Windows Store Apps: 1
     XboxOne: 1
@@ -812,7 +814,7 @@ PlayerSettings:
   embeddedLinuxEnableGamepadInput: 0
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
-  apiCompatibilityLevel: 3
+  apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
   cloudProjectId: 
